@@ -1,6 +1,6 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #191919;
+    font-family: 'JetBrains Mono', monospace; /* Updated to JetBrains Mono */
+    background-color: #ff0000;
     color: #ffffff;
     display: flex;
     justify-content: center;
@@ -28,4 +28,19 @@ input[type="file"] {
     margin: 10px;
     border: 2px solid #A3B18A; /* Border color */
     border-radius: 5px;
+}
+
+/* Button Styles */
+button {
+    background-color: #A3B18A; /* Button background color */
+    color: #191919; /* Button text color */
+    border: none; /* Remove default border */
+    padding: 10px 20px; /* Padding for button */
+    border-radius: 20%; /* Rounded edges */
+    cursor: pointer; /* Pointer on hover */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+button:hover {
+    background-color: #8c9a7a; /* Darker shade on hover */
 }

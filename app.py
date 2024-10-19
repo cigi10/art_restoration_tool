@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, send_from_directory
 import cv2
 import numpy as np
 import os
@@ -32,10 +32,16 @@ def upload_file():
     image = cv2.imread(file_path)
     denoised_image = denoise_image(image)
 
-    denoised_file_path = os.path.join(app.config['UPLOAD_FOLDER'], 'denoised_' + filename)
+    denoised_filename = 'denoised_' + filename
+    denoised_file_path = os.path.join(app.config['UPLOAD_FOLDER'], denoised_filename)
     cv2.imwrite(denoised_file_path, denoised_image)
 
-    return jsonify({'denoised_image_url': denoised_file_path})
+    # Return the URL for the denoised image
+    return jsonify({'denoised_image_url': f'/uploads/{denoised_filename}'})
+
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 if __name__ == '__main__':
     app.run(debug=True)
