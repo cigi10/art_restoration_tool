@@ -45,9 +45,12 @@ def upload_file():
     return redirect(url_for('show_result', filename=file.filename))
 
 @app.route('/result/<filename>')
+@app.route('/result/<filename>')
 def show_result(filename):
-    restored_image_url = url_for('restored', filename=filename)
+    # Change the URL building to correctly reference the static folder
+    restored_image_url = url_for('static', filename=f'restored/{filename}')
     return render_template('result.html', restored_image=restored_image_url)
+
 
 def restore_image(input_path, output_path):
     # Restore image logic (replace with actual restoration logic)
