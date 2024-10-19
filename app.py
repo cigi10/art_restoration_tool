@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, send_file
+from flask import Flask, request, render_template, send_file, redirect, url_for
 import os
 import cv2
 import numpy as np
@@ -41,7 +41,13 @@ def upload_file():
     restored_image_path = os.path.join(RESTORED_FOLDER, file.filename)
     restore_image(file_path, restored_image_path)
 
-    return send_file(restored_image_path, mimetype='image/jpeg')
+    # Redirect to result page instead of sending file directly
+    return redirect(url_for('show_result', filename=file.filename))
+
+@app.route('/result/<filename>')
+def show_result(filename):
+    restored_image_url = url_for('restored', filename=filename)
+    return render_template('result.html', restored_image=restored_image_url)
 
 def restore_image(input_path, output_path):
     # Restore image logic (replace with actual restoration logic)
@@ -50,7 +56,7 @@ def restore_image(input_path, output_path):
     if image is None:
         raise ValueError("Could not read the image file.")
     
-    # Example restoration logic (replace with your own)
+    # Example restoration logic (replace this with your own)
     restored_image = cv2.GaussianBlur(image, (5, 5), 0)  # Replace this with actual restoration logic
     cv2.imwrite(output_path, restored_image)
 

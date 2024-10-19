@@ -4,20 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Art Restoration Tool</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="styles.css"> <!-- Optional: Link to your CSS file -->
 </head>
 <body>
-    <div class="container">
-        <h1>AI Art Restoration Tool</h1>
-        <form id="upload-form" action="/upload" method="POST" enctype="multipart/form-data">
-            <input type="file" name="file" accept="image/*" required>
-            <button type="submit">Restore</button>
-        </form>
-        <div id="result" class="hidden">
-            <h2>Restored Image:</h2>
-            <img id="restored-image" src="" alt="Restored Image">
-        </div>
-    </div>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <h1>AI Art Restoration Tool</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="file">Upload a damaged painting:</label>
+        <input type="file" id="file" name="file" accept="image/*" required>
+        <button type="submit">Restore Image</button>
+    </form>
 </body>
 </html>
