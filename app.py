@@ -1,7 +1,6 @@
-from flask import Flask, request, render_template, send_file, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for
 import os
 import cv2
-import numpy as np
 
 app = Flask(__name__)
 
@@ -29,7 +28,7 @@ def upload_file():
     if file.filename == '':
         return 'No selected file', 400
     
-    # Validate file type (optional)
+    # Validate file type
     if not file.filename.lower().endswith(('.png', '.jpg', '.jpeg', '.gif')):
         return 'Unsupported file type. Please upload an image.', 400
 
@@ -46,18 +45,19 @@ def upload_file():
 
 @app.route('/result/<filename>')
 def show_result(filename):
-    restored_image_url = url_for('restored', filename=filename)
+    # Correctly construct the URL to access the restored image
+    restored_image_url = url_for('static', filename=f'restored/{filename}')
     return render_template('result.html', restored_image=restored_image_url)
 
 def restore_image(input_path, output_path):
-    # Restore image logic (replace with actual restoration logic)
+    # Restore image logic
     image = cv2.imread(input_path)
 
     if image is None:
         raise ValueError("Could not read the image file.")
     
-    # Example restoration logic (replace this with your own)
-    restored_image = cv2.GaussianBlur(image, (5, 5), 0)  # Replace this with actual restoration logic
+    # Example restoration logic (Gaussian Blur in this case)
+    restored_image = cv2.GaussianBlur(image, (5, 5), 0)
     cv2.imwrite(output_path, restored_image)
 
 if __name__ == '__main__':
