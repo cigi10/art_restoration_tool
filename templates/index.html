@@ -3,15 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Art Restoration Tool</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Optional: Link to your CSS file -->
+    <title>Image Denoising</title>
 </head>
 <body>
-    <h1>AI Art Restoration Tool</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <label for="file">Upload a damaged painting:</label>
-        <input type="file" id="file" name="file" accept="image/*" required>
-        <button type="submit">Restore Image</button>
+    <h1>Image Denoising App</h1>
+    <form action="/" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" required>
+        <button type="submit">Upload</button>
     </form>
+    
+    {% if noisy_image %}
+        <h2>Noisy Image</h2>
+        <img src="{{ noisy_image }}" alt="Noisy Image">
+    {% endif %}
+    
+    {% if denoised_image %}
+        <h2>Denoised Image</h2>
+        <img src="{{ denoised_image }}" alt="Denoised Image">
+    {% endif %}
 </body>
 </html>
