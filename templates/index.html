@@ -14,14 +14,11 @@
         <button type="submit">Upload</button>
     </form>
     
-    {% if noisy_image %}
-        <h2>Noisy Image</h2>
-        <img src="{{ noisy_image }}" alt="Noisy Image">
-    {% endif %}
-    
-    {% if denoised_image %}
-        <h2>Denoised Image</h2>
-        <img src="{{ denoised_image }}" alt="Denoised Image">
-    {% endif %}
+    <h2>Original Image</h2>
+    <img src="{{ noisy_image }}" alt="Original Image" width="300">
+
+    <h2>Denoised Image</h2>
+    <img src="{{ denoised_image }}" alt="Denoised Image" width="300">
+
 </body>
 </html>
